@@ -17,14 +17,14 @@
   "kv_namespaces": [
     {
       "binding": "KV",
-      "id": "4abd52f3f2c549ac83cc2cb4ceec8620",
+      "id": "aa9aa04ba9d04a1c84a36277577a5f8e",
     },
   ],
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "open-seo",
-      "database_id": "37bee90a-e1aa-404f-b01e-b0d1d479bda1",
+      "database_id": "9e3f9753-f69c-4f94-a797-4dd4f9304d69",
       "migrations_dir": "drizzle",
     },
   ],
