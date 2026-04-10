@@ -33,6 +33,12 @@ import {
   type BacklinksTimeseriesRequest,
 } from "@/server/lib/dataforseoBacklinks";
 import {
+  fetchAdsAdvertisersRaw,
+  fetchAdsSearchRaw,
+  type AdsAdvertisersInput,
+  type AdsSearchInput,
+} from "@/server/lib/dataforseoAdsTransparency";
+import {
   type DataforseoApiResponse,
   type DataforseoApiCallCost,
 } from "@/server/lib/dataforseoCost";
@@ -173,6 +179,18 @@ export function createDataforseoClient(customer: BillingCustomerContext) {
       live(input: { url: string; strategy: LighthouseStrategy }) {
         return meterDataforseoCall<StoredLighthousePayload>(customer, () =>
           fetchDataforseoLighthouseResultRaw(input),
+        );
+      },
+    },
+    adsTransparency: {
+      advertisers(input: AdsAdvertisersInput) {
+        return meterDataforseoCall(customer, () =>
+          fetchAdsAdvertisersRaw(input),
+        );
+      },
+      adsSearch(input: AdsSearchInput) {
+        return meterDataforseoCall(customer, () =>
+          fetchAdsSearchRaw(input),
         );
       },
     },

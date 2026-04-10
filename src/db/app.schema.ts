@@ -101,6 +101,99 @@ export const keywordMetrics = sqliteTable(
 );
 
 // ============================================================================
+// Ads Transparency tables
+// ============================================================================
+
+export const savedAdvertisers = sqliteTable(
+  "saved_advertisers",
+  {
+    id: text("id").primaryKey(),
+    projectId: text("project_id")
+      .notNull()
+      .references(() => projects.id, { onDelete: "cascade" }),
+    advertiserId: text("advertiser_id").notNull(),
+    advertiserName: text("advertiser_name"),
+    domain: text("domain"),
+    keyword: text("keyword").notNull(),
+    locationCode: integer("location_code").notNull().default(2840),
+    adsCount: integer("ads_count"),
+    verified: integer("verified", { mode: "boolean" }),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(current_timestamp)`),
+  },
+  (table) => [
+    uniqueIndex("saved_advertisers_unique_project_advertiser").on(
+      table.projectId,
+      table.advertiserId,
+    ),
+    index("saved_advertisers_project_created_idx").on(
+      table.projectId,
+      table.createdAt,
+    ),
+  ],
+);
+
+export const savedCreatives = sqliteTable(
+  "saved_creatives",
+  {
+    id: text("id").primaryKey(),
+    projectId: text("project_id")
+      .notNull()
+      .references(() => projects.id, { onDelete: "cascade" }),
+    creativeId: text("creative_id").notNull(),
+    advertiserId: text("advertiser_id").notNull(),
+    title: text("title"),
+    url: text("url"),
+    format: text("format"),
+    previewImage: text("preview_image"),
+    firstShown: text("first_shown"),
+    lastShown: text("last_shown"),
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(current_timestamp)`),
+  },
+  (table) => [
+    uniqueIndex("saved_creatives_unique_project_creative").on(
+      table.projectId,
+      table.creativeId,
+    ),
+    index("saved_creatives_project_created_idx").on(
+      table.projectId,
+      table.createdAt,
+    ),
+  ],
+);
+
+// ============================================================================
+// Google Ads Change Log
+// ============================================================================
+
+export const gadsChangeLog = sqliteTable(
+  "gads_change_log",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    projectId: text("project_id")
+      .notNull()
+      .references(() => projects.id, { onDelete: "cascade" }),
+    action: text("action").notNull(), // e.g. "campaign_status", "budget_update", "add_negative"
+    entityType: text("entity_type").notNull(), // e.g. "campaign", "keyword", "budget"
+    entityId: text("entity_id").notNull(),
+    entityName: text("entity_name"),
+    oldValue: text("old_value"),
+    newValue: text("new_value"),
+    source: text("source").notNull().default("ui"), // "ui", "mcp", "api"
+    createdAt: text("created_at")
+      .notNull()
+      .default(sql`(current_timestamp)`),
+  },
+  (table) => [
+    index("gads_change_log_project_idx").on(table.projectId),
+    index("gads_change_log_created_idx").on(table.createdAt),
+  ],
+);
+
+// ============================================================================
 // Site Audit tables
 // ============================================================================
 

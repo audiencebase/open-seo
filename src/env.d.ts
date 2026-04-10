@@ -15,6 +15,13 @@ declare namespace Cloudflare {
 
     // DataForSEO API Basic auth value (base64 of login:password)
     DATAFORSEO_API_KEY: string;
+
+    // Google Ads API credentials
+    GOOGLE_ADS_DEVELOPER_TOKEN?: string;
+    GOOGLE_ADS_CLIENT_ID?: string;
+    GOOGLE_ADS_CLIENT_SECRET?: string;
+    GOOGLE_ADS_REFRESH_TOKEN?: string;
+    GOOGLE_ADS_CUSTOMER_ID?: string;
   }
 }
 

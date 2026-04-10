@@ -1,9 +1,11 @@
 import {
+  BarChart3,
   Bookmark,
   Bot,
   ClipboardCheck,
   Globe,
   Link2,
+  Megaphone,
   Search,
 } from "lucide-react";
 import { linkOptions } from "@tanstack/react-router";
@@ -32,6 +34,18 @@ const projectNavItems = [
     label: "Backlinks",
     icon: Link2,
     matchSegment: "/backlinks",
+  },
+  {
+    to: "/p/$projectId/ads" as const,
+    label: "Ads Spy",
+    icon: Megaphone,
+    matchSegment: "/ads",
+  },
+  {
+    to: "/p/$projectId/google-ads" as const,
+    label: "Google Ads",
+    icon: BarChart3,
+    matchSegment: "/google-ads",
   },
   {
     to: "/p/$projectId/audit" as const,

@@ -26,10 +26,12 @@ import { Route as ProjectPProjectIdRouteRouteImport } from './routes/_project/p/
 import { Route as ProjectPProjectIdIndexRouteImport } from './routes/_project/p/$projectId/index'
 import { Route as ProjectPProjectIdSavedRouteImport } from './routes/_project/p/$projectId/saved'
 import { Route as ProjectPProjectIdKeywordsRouteImport } from './routes/_project/p/$projectId/keywords'
+import { Route as ProjectPProjectIdGoogleAdsRouteImport } from './routes/_project/p/$projectId/google-ads'
 import { Route as ProjectPProjectIdDomainRouteImport } from './routes/_project/p/$projectId/domain'
 import { Route as ProjectPProjectIdBacklinksRouteImport } from './routes/_project/p/$projectId/backlinks'
 import { Route as ProjectPProjectIdAuditRouteImport } from './routes/_project/p/$projectId/audit'
 import { Route as ProjectPProjectIdAiRouteImport } from './routes/_project/p/$projectId/ai'
+import { Route as ProjectPProjectIdAdsRouteImport } from './routes/_project/p/$projectId/ads'
 import { Route as ProjectPProjectIdAuditIndexRouteImport } from './routes/_project/p/$projectId/audit/index'
 import { Route as ProjectPProjectIdAuditIssuesResultIdRouteImport } from './routes/_project/p/$projectId/audit/issues/$resultId'
 
@@ -116,6 +118,12 @@ const ProjectPProjectIdKeywordsRoute =
     path: '/keywords',
     getParentRoute: () => ProjectPProjectIdRouteRoute,
   } as any)
+const ProjectPProjectIdGoogleAdsRoute =
+  ProjectPProjectIdGoogleAdsRouteImport.update({
+    id: '/google-ads',
+    path: '/google-ads',
+    getParentRoute: () => ProjectPProjectIdRouteRoute,
+  } as any)
 const ProjectPProjectIdDomainRoute = ProjectPProjectIdDomainRouteImport.update({
   id: '/domain',
   path: '/domain',
@@ -135,6 +143,11 @@ const ProjectPProjectIdAuditRoute = ProjectPProjectIdAuditRouteImport.update({
 const ProjectPProjectIdAiRoute = ProjectPProjectIdAiRouteImport.update({
   id: '/ai',
   path: '/ai',
+  getParentRoute: () => ProjectPProjectIdRouteRoute,
+} as any)
+const ProjectPProjectIdAdsRoute = ProjectPProjectIdAdsRouteImport.update({
+  id: '/ads',
+  path: '/ads',
   getParentRoute: () => ProjectPProjectIdRouteRoute,
 } as any)
 const ProjectPProjectIdAuditIndexRoute =
@@ -162,10 +175,12 @@ export interface FileRoutesByFullPath {
   '/help/dataforseo-api-key': typeof AppHelpDataforseoApiKeyRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/autumn/$': typeof ApiAutumnSplatRoute
+  '/p/$projectId/ads': typeof ProjectPProjectIdAdsRoute
   '/p/$projectId/ai': typeof ProjectPProjectIdAiRoute
   '/p/$projectId/audit': typeof ProjectPProjectIdAuditRouteWithChildren
   '/p/$projectId/backlinks': typeof ProjectPProjectIdBacklinksRoute
   '/p/$projectId/domain': typeof ProjectPProjectIdDomainRoute
+  '/p/$projectId/google-ads': typeof ProjectPProjectIdGoogleAdsRoute
   '/p/$projectId/keywords': typeof ProjectPProjectIdKeywordsRoute
   '/p/$projectId/saved': typeof ProjectPProjectIdSavedRoute
   '/p/$projectId/': typeof ProjectPProjectIdIndexRoute
@@ -183,9 +198,11 @@ export interface FileRoutesByTo {
   '/help/dataforseo-api-key': typeof AppHelpDataforseoApiKeyRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/autumn/$': typeof ApiAutumnSplatRoute
+  '/p/$projectId/ads': typeof ProjectPProjectIdAdsRoute
   '/p/$projectId/ai': typeof ProjectPProjectIdAiRoute
   '/p/$projectId/backlinks': typeof ProjectPProjectIdBacklinksRoute
   '/p/$projectId/domain': typeof ProjectPProjectIdDomainRoute
+  '/p/$projectId/google-ads': typeof ProjectPProjectIdGoogleAdsRoute
   '/p/$projectId/keywords': typeof ProjectPProjectIdKeywordsRoute
   '/p/$projectId/saved': typeof ProjectPProjectIdSavedRoute
   '/p/$projectId': typeof ProjectPProjectIdIndexRoute
@@ -208,10 +225,12 @@ export interface FileRoutesById {
   '/_app/help/dataforseo-api-key': typeof AppHelpDataforseoApiKeyRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/autumn/$': typeof ApiAutumnSplatRoute
+  '/_project/p/$projectId/ads': typeof ProjectPProjectIdAdsRoute
   '/_project/p/$projectId/ai': typeof ProjectPProjectIdAiRoute
   '/_project/p/$projectId/audit': typeof ProjectPProjectIdAuditRouteWithChildren
   '/_project/p/$projectId/backlinks': typeof ProjectPProjectIdBacklinksRoute
   '/_project/p/$projectId/domain': typeof ProjectPProjectIdDomainRoute
+  '/_project/p/$projectId/google-ads': typeof ProjectPProjectIdGoogleAdsRoute
   '/_project/p/$projectId/keywords': typeof ProjectPProjectIdKeywordsRoute
   '/_project/p/$projectId/saved': typeof ProjectPProjectIdSavedRoute
   '/_project/p/$projectId/': typeof ProjectPProjectIdIndexRoute
@@ -232,10 +251,12 @@ export interface FileRouteTypes {
     | '/help/dataforseo-api-key'
     | '/api/auth/$'
     | '/api/autumn/$'
+    | '/p/$projectId/ads'
     | '/p/$projectId/ai'
     | '/p/$projectId/audit'
     | '/p/$projectId/backlinks'
     | '/p/$projectId/domain'
+    | '/p/$projectId/google-ads'
     | '/p/$projectId/keywords'
     | '/p/$projectId/saved'
     | '/p/$projectId/'
@@ -253,9 +274,11 @@ export interface FileRouteTypes {
     | '/help/dataforseo-api-key'
     | '/api/auth/$'
     | '/api/autumn/$'
+    | '/p/$projectId/ads'
     | '/p/$projectId/ai'
     | '/p/$projectId/backlinks'
     | '/p/$projectId/domain'
+    | '/p/$projectId/google-ads'
     | '/p/$projectId/keywords'
     | '/p/$projectId/saved'
     | '/p/$projectId'
@@ -277,10 +300,12 @@ export interface FileRouteTypes {
     | '/_app/help/dataforseo-api-key'
     | '/api/auth/$'
     | '/api/autumn/$'
+    | '/_project/p/$projectId/ads'
     | '/_project/p/$projectId/ai'
     | '/_project/p/$projectId/audit'
     | '/_project/p/$projectId/backlinks'
     | '/_project/p/$projectId/domain'
+    | '/_project/p/$projectId/google-ads'
     | '/_project/p/$projectId/keywords'
     | '/_project/p/$projectId/saved'
     | '/_project/p/$projectId/'
@@ -420,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectPProjectIdKeywordsRouteImport
       parentRoute: typeof ProjectPProjectIdRouteRoute
     }
+    '/_project/p/$projectId/google-ads': {
+      id: '/_project/p/$projectId/google-ads'
+      path: '/google-ads'
+      fullPath: '/p/$projectId/google-ads'
+      preLoaderRoute: typeof ProjectPProjectIdGoogleAdsRouteImport
+      parentRoute: typeof ProjectPProjectIdRouteRoute
+    }
     '/_project/p/$projectId/domain': {
       id: '/_project/p/$projectId/domain'
       path: '/domain'
@@ -446,6 +478,13 @@ declare module '@tanstack/react-router' {
       path: '/ai'
       fullPath: '/p/$projectId/ai'
       preLoaderRoute: typeof ProjectPProjectIdAiRouteImport
+      parentRoute: typeof ProjectPProjectIdRouteRoute
+    }
+    '/_project/p/$projectId/ads': {
+      id: '/_project/p/$projectId/ads'
+      path: '/ads'
+      fullPath: '/p/$projectId/ads'
+      preLoaderRoute: typeof ProjectPProjectIdAdsRouteImport
       parentRoute: typeof ProjectPProjectIdRouteRoute
     }
     '/_project/p/$projectId/audit/': {
@@ -499,10 +538,12 @@ const ProjectPProjectIdAuditRouteWithChildren =
   )
 
 interface ProjectPProjectIdRouteRouteChildren {
+  ProjectPProjectIdAdsRoute: typeof ProjectPProjectIdAdsRoute
   ProjectPProjectIdAiRoute: typeof ProjectPProjectIdAiRoute
   ProjectPProjectIdAuditRoute: typeof ProjectPProjectIdAuditRouteWithChildren
   ProjectPProjectIdBacklinksRoute: typeof ProjectPProjectIdBacklinksRoute
   ProjectPProjectIdDomainRoute: typeof ProjectPProjectIdDomainRoute
+  ProjectPProjectIdGoogleAdsRoute: typeof ProjectPProjectIdGoogleAdsRoute
   ProjectPProjectIdKeywordsRoute: typeof ProjectPProjectIdKeywordsRoute
   ProjectPProjectIdSavedRoute: typeof ProjectPProjectIdSavedRoute
   ProjectPProjectIdIndexRoute: typeof ProjectPProjectIdIndexRoute
@@ -510,10 +551,12 @@ interface ProjectPProjectIdRouteRouteChildren {
 
 const ProjectPProjectIdRouteRouteChildren: ProjectPProjectIdRouteRouteChildren =
   {
+    ProjectPProjectIdAdsRoute: ProjectPProjectIdAdsRoute,
     ProjectPProjectIdAiRoute: ProjectPProjectIdAiRoute,
     ProjectPProjectIdAuditRoute: ProjectPProjectIdAuditRouteWithChildren,
     ProjectPProjectIdBacklinksRoute: ProjectPProjectIdBacklinksRoute,
     ProjectPProjectIdDomainRoute: ProjectPProjectIdDomainRoute,
+    ProjectPProjectIdGoogleAdsRoute: ProjectPProjectIdGoogleAdsRoute,
     ProjectPProjectIdKeywordsRoute: ProjectPProjectIdKeywordsRoute,
     ProjectPProjectIdSavedRoute: ProjectPProjectIdSavedRoute,
     ProjectPProjectIdIndexRoute: ProjectPProjectIdIndexRoute,
