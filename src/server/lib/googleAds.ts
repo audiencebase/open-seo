@@ -55,7 +55,7 @@ async function getAccessToken(): Promise<string> {
 // Helpers
 // ---------------------------------------------------------------------------
 
-const GOOGLE_ADS_API_VERSION = "v19";
+const GOOGLE_ADS_API_VERSION = "v20";
 
 async function getCleanCustomerId(): Promise<string> {
   const customerId = await getRequiredEnvValue("GOOGLE_ADS_CUSTOMER_ID");
